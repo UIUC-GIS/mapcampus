@@ -1,0 +1,22 @@
+#map_canvas {
+  height: 100%;
+  width: 100%;
+}
+
+#center {
+  position: relative;
+  width: 100%;
+}
+
+#entry {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 85px;
+  vertical-align: middle;
+  z-index: 50;
+}
+
+#entry .btn {
+  vertical-align: top;
+}

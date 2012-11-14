@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MapCampus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    {% if debug %}
+    <link href="{{ STATIC_URL }}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    {% else %}
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    {% endif %}
+    <link href="{{ STATIC_URL }}css/map.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    {% include "navbar.html" %}
+
+    <div id="center">
+      <form id="entry" class="form-horizontal pull-left well">
+        <span class="input-prepend">
+          <span class="add-on">From</span>
+          <input id="from-input" type="text" class="span2">
+        </span>
+        <span class="input-prepend">
+          <span class="add-on">To</span>
+          <input id="to-input" type="text" class="span2">
+        </span>
+        <button type="submit" class="btn btn-primary">Go &raquo;</button>
+      </form>
+
+      <div id="map_canvas"/>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    {% if debug %}
+    <script src="{{ STATIC_URL }}/jquery/js/jquery-1.8.2.js"></script>
+    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap.js"></script>
+    {% else %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+    {% endif %}
+
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDKInBVAs45LOtPhtiTce3W7XVvdpBCHWE&sensor=true">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(40.10804, -88.22726),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(
+          $("#map_canvas")[0],
+          mapOptions
+        );
+
+        var wnd = $(window);
+        var center = $("#center");
+        var top = $("#north").height();
+
+        wnd.resize(function() {
+
+          center.height(wnd.height() - top);
+        });
+
+        wnd.trigger("resize");
+
+        $("#entry").fadeIn();
+
+        $('#from-input').typeahead({
+            source: ["Cats", "Meow"]
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  </body>
+</html>
