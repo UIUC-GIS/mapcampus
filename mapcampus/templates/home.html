@@ -7,14 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
-    {% if debug %}
-    <link href="{{ STATIC_URL }}/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    {% else %}
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
-    {% endif %}
-    <link href="{{ STATIC_URL }}css/map.css" rel="stylesheet">
+    {% include "styles.html" %}
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -23,7 +16,7 @@
   </head>
 
   <body>
-    {% include "navbar.html" %}
+    {% include "navbar.html" with home_item_class="active" %}
 
     <div id="center">
       <form id="entry" class="form-horizontal pull-left well">
@@ -41,21 +34,8 @@
       <div id="map_canvas"/>
     </div>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    {% include "map_scripts.html" %}
 
-    {% if debug %}
-    <script src="{{ STATIC_URL }}/jquery/js/jquery-1.8.2.js"></script>
-    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap.js"></script>
-    {% else %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
-    {% endif %}
-
-    <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDKInBVAs45LOtPhtiTce3W7XVvdpBCHWE&sensor=true">
-    </script>
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
@@ -85,10 +65,11 @@
         $('#from-input').typeahead({
             source: ["Cats", "Meow"]
         });
+
+        $("#home_nav_item").addClass("active")
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-  </head>
   </body>
 </html>
