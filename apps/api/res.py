@@ -6,7 +6,6 @@ from tastypie.contrib.gis.resources import ModelResource
 
 from apps.map.graph import LazyGraph
 from apps.map.models import Building, Node, Edge
-from apps.map.astar import bidirectional_astar
 
 class DummyPaginator(object):
   def __init__(self, objects, collection_name='objects', **kwargs):
