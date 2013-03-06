@@ -13,12 +13,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'gisdb',                      # Or path to database file if using sqlite3.
-        'USER': 'ylou',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.contrib.gis.db.backends.postgis', 
+        'NAME': 'gisdb', #'mapcampu_test'
+        'USER': 'ylou', #'mapcampu_prod'
+        'PASSWORD': '', #'prod1867'
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -49,7 +49,7 @@ USE_L10N = True
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Main URL for the project
-BASE_URL = 'http://example.org'
+BASE_URL = 'http://www.mapcamp.us'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
