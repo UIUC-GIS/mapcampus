@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="mc">
   <head>
     <meta charset="utf-8">
     <title>MapCampus</title>
@@ -15,61 +15,28 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body ng-controller="MapCtrl">
     {% include "navbar.html" with home_item_class="active" %}
 
     <div id="center">
       <form id="entry" class="form-horizontal pull-left well">
         <span class="input-prepend">
           <span class="add-on">From</span>
-          <input id="from-input" type="text" class="span2">
+          <input id="from-input" type="text" class="span2" autocomplete="off" ng-model="from" building-typeahead>
         </span>
         <span class="input-prepend">
           <span class="add-on">To</span>
-          <input id="to-input" type="text" class="span2">
+          <input id="to-input" type="text" class="span2" autocomplete="off" ng-model="to" building-typeahead>
         </span>
-        <button type="submit" class="btn btn-primary">Go &raquo;</button>
+        <button type="submit" class="btn btn-primary" ng-click="search(from, to)">Go &raquo;</button>
       </form>
 
       <div id="map_canvas"/>
     </div>
 
     {% include "map_scripts.html" %}
-
-    <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(40.10804, -88.22726),
-          zoom: 18,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        var map = new google.maps.Map(
-          $("#map_canvas")[0],
-          mapOptions
-        );
-
-        var wnd = $(window);
-        var center = $("#center");
-        var top = $("#north").height();
-
-        wnd.resize(function() {
-
-          center.height(wnd.height() - top);
-        });
-
-        wnd.trigger("resize");
-
-        $("#entry").fadeIn();
-
-        $('#from-input').typeahead({
-            source: ["Cats", "Meow"]
-        });
-
-        $("#home_nav_item").addClass("active")
-      }
-
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+    <script src="{{ STATIC_URL }}js/common/services.js"></script>
+    <script src="{{ STATIC_URL }}js/common/app.js"></script>
+    <script src="{{ STATIC_URL }}js/home/controllers.js"></script>
   </body>
 </html>
